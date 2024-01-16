@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Fixação</title>
+  <!-- Esse link foi pego no site 'https://cdnjs.com/libraries/font-awesome'. Basicamente ele permite utilizarmos informações do site font-awesome, para pegarmos icones. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<!--bg-amber-50(é a cor), flex flex-col (pede p colocar em colunas. se tirar o flex-col dá merda, visto que o padrão do flex é lado a lado, não em colunas.) -->
+<body class="bg-amber-50 flex flex-col">
+
+  
+  <!-- justify-between: joga os itens para a direita// alinha alguns na esquerda e outros na direita.-->
+  <!-- items-end: alinha-os na parte DEBAIXO da div. -->
+  <!-- shadow-lg(sombra LARGA), shadow-neutral-800(cor da sombra) -->
+  <!-- text-xl (texto grande. Observe que a maioria dos itens do header são considerados textos. Até mesmo os ícones.) -->
+  <!-- O z-10 foi inserido para desbugar o carrinho de compras. -->
+  <header class="flex bg-neutral-900 shadow-lg shadow-neutral-800 p-0 justify-between items-end px-1 sticky top-0 text-xl  z-10">
+    
+    <!-- h-screen: o conteúdo ocupará 100vh.  -->
+    <!-- // O -360px diz que ele carregará o site "por trás" da página. Mude para valores positivos para entender melhor. -->
+    <!-- z-50(propriedade z-index. É porque como o header está com a classe sticky(p ele ficar fixo e acima de todos), ao acionarmos o carrinho, o header pode ficar em cima dele, impossibilitando de vermos o carrinho. Por isso utilizamos essa classe para botar o carrinho em cima de geral.) -->
+    <!-- duration-300 (o elemento 'desliza' ao invés de só aparecer) // rounded-x1 (é o border-radius. arredonda a borda.) -->
+    <!-- border-l-4(borda na esquerda(left) e 4 é o tamaho.) / border-sky-500(cor da borda.) -->
+    <!-- flex flex-col (pede p colocar em colunas. se tirar o flex-col dá merda, visto que o padrão do flex é lado a lado, não em colunas.) -->
+    <!-- Como os elementos estão organizados em colunas, o justify-between separa-os verticalmente. Se o display fosse apenas flex(lado a lado, ao invés de colunas), o justify-between separaria na horizontal (assim como foi feito no HEADER, colocando os itens separados lado a lado.) -->
+    <section id="carrinho" class="fixed top-0 right-[-360px] bg-neutral-800 h-screen w-[360px] text-slate-200 z-50 duration-300 rounded-xl border-l-4 border-sky-500 p-5 flex flex-col justify-between">
+      
+      <div id="cabecalho-carrinho" class="flex justify-between m-4">
+
+        <p>Carrinho de compras</p>
+        
+        <!-- A classe do ícone foi pega do site de ícones. -->
+        <button id="fechar-carrinho"><i class="fa-solid fa-circle-xmark text-red-400 	"></i></button>
+
+      </div>
+
+      <!-- h-3/5(tamanho que o carrinho pode ter é 3/5 do tamanho da tela. Depois disso será barra de rolagens.) -->
+      <!-- propriedade overflow do css evita o transbordamento. y porque ele "transborda" na vertical -->
+      <section id="produtos-carrinho" class="h-3/5 overflow-y-auto flex flex-col">
+        
+      </section>
+
+      <p id="preco-total" class="bg-slate-200 text-green-700 rounded-sm pl-5"> 0 </p>
+      <!-- slates são as cores de background(bg) e textos(text) -->
+      <button id="finalizar-compra" class="bg-slate-200 text-slate-900 p-1 hover:bg-green-300 duration-500">Finalizar compra</button>
+
+    </section>
+
+
+    
+    <section class="text-slate-200 flex gap-7 mx-2 mb-2">
+
+        <a href="./"><img src="./assets/logo/logo_fix.png" alt="logo" class="h-14 mt-1"></a>
+
+    </section>
+
+
+
+    <!-- text-slate (cor branca) flex(alinha os itens) gap-5(deixa um espaço entre os links.) -->
+    <div class="text-slate-200 flex gap-7 mx-2 mb-2">
+
+      <button id="abrir-carrinho">
+        <p>Carrinho</p>
+        <!-- Linha abaixo: ícone retirado do site de ícones (a classe tbm. Só copiei.) -->
+        <i class="fa-solid fa-cart-shopping"></i>
+      </button>
+
+      <a href="/pedidos.html">
+        <button>
+          <p>Histórico</p>
+          <!-- Linha abaixo: ícone retirado do site de ícones (a classe tbm. Só copiei.) -->
+          <i class="fa-solid fa-user"></i>
+        </button>
+      </a>
+
+    </div>
+
+  </header>
+
+  <main class="flex flex-col items-center">
+
+    
+    <section id="filtros" class="p-10 flex ">
+
+      <div class="px-2">
+        <!-- peer: comanda o cara que eles está associado, no caso, a label.  -->
+        <!-- hidden: o botão existe, mas está escondido. -->
+        <!-- checked: botão começa marcado. -->
+        <!-- peer:checked (quando o seu parceiro/ elemento associado estiver marcado, faça isso) -->
+        <!-- como todos tem o mesmo nome(filtro), o usuário só poderá escolher UMA opção -->
+        <!-- select-none(não deixa o usuário "selecionar" a caixinha como se fosse um texto. Ela se comportará 100% como um botão) -->
+        <input id="exibir-todos" type="radio" class="peer hidden" name="filtro" checked/>
+        <label for="exibir-todos" class="peer-checked:bg-slate-950 peer-checked:text-slate-200 peer-checked:font-bold p-2 rounded-xl select-none cursor-pointer">Todos</label>
+      </div>
+
+      <div class="px-2">
+        <input id="exibir-masculinos" type="radio" class="peer hidden" name="filtro"/>
+        <label for="exibir-masculinos" class="peer-checked:bg-slate-950 peer-checked:text-slate-200 peer-checked:font-bold p-2 rounded-xl select-none cursor-pointer">Masculinos</label>
+      </div>
+      
+      <div class="px-2">
+        <input id="exibir-femininos" type="radio" class="peer hidden" name="filtro"/>
+        <label for="exibir-femininos" class="peer-checked:bg-slate-950 peer-checked:text-slate-200 peer-checked:font-bold p-2 rounded-xl select-none cursor-pointer">Femininos</label>
+      </div>
+
+    </section>
+
+    <!-- flex(alinha os itens) flex-wrap(quebra a imagem quando a tela fica menor.) -->
+
+    <section id="container-produto" class="flex flex-wrap p-10 justify-center gap-8">
+
+    </section>
+
+  </main>
+
+  <!-- type="module" permite a importação de outros arquivos JS no arquivo principal main.js -->
+  <script type="module" src="./main.js"></script>
+
+</body>
+</html>
